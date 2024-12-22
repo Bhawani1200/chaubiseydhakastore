@@ -1,6 +1,17 @@
+"use client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 const Filter = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const handleFilterChange=(e:React.ChangeEvent<HTMLSelectElement | HTMLInputElement>)=>{
+  const {name,value}=e.target;
+  console.log(name,value);
+  const params=new URLSearchParams(searchParams);
+  params.set(name,value);
+  }
   return (
     <div className="mt-12 flex justify-between">
       <div className="flex gap-6 flex-wrap">
@@ -8,10 +19,15 @@ const Filter = () => {
           name="type"
           id=""
           className="py-2 px-4 rounded-2xl text-xs text-black font-medium bg-white ring-1 ring-gray-400"
+          onChange={handleFilterChange}
         >
           <option className="text-black">Type</option>
-          <option value="physical" className="text-black">physical</option>
-          <option value="Digital" className="text-black">Digital</option>
+          <option value="physical" className="text-black">
+            physical
+          </option>
+          <option value="Digital" className="text-black">
+            Digital
+          </option>
         </select>
         <input
           type="text"
@@ -25,7 +41,7 @@ const Filter = () => {
           placeholder="max price"
           className="text-xs  rounded-2xl pl-2 w-24 ring-1 ring-gray-400"
         />
-        <select
+        {/* <select
           name="type"
           id=""
           className="text-black py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]"
@@ -34,7 +50,7 @@ const Filter = () => {
           <option value="physical">L</option>
           <option value="Digital">M</option>
           <option value="Digital">XL</option>
-        </select>
+        </select> */}
         <select
           name="type"
           id=""
@@ -64,16 +80,24 @@ const Filter = () => {
         </select>
       </div>
       <div className="">
-      <select
+        <select
           name=""
           id=""
           className="py-2 px-4 rounded-2xl text-xs text-black bg-white font-medium ring-1 ring-gray-400"
         >
           <option className="text-black">Select</option>
-          <option value="physical" className="text-black">Price (low to high)</option>
-          <option value="Digital" className="text-black">Price (high to low)</option>
-          <option value="physical" className="text-black">Newest</option>
-          <option value="Digital" className="text-black">Oldest</option>
+          <option value="physical" className="text-black">
+            Price (low to high)
+          </option>
+          <option value="Digital" className="text-black">
+            Price (high to low)
+          </option>
+          <option value="physical" className="text-black">
+            Newest
+          </option>
+          <option value="Digital" className="text-black">
+            Oldest
+          </option>
         </select>
       </div>
     </div>
